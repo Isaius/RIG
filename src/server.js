@@ -1,10 +1,16 @@
-'use strict'
+const express = require('express');
+const routes = require('./routes');
 
-const app = require('../src/router');
-const debug = require('debug')('RIG:server');
-const http = require('http');
+require('./database');
 
-const server = http.createServer(app)
+const app = express();
+
+app.use(express.json());
+app.use(routes);
+
+const port = normalizePort(process.env.PORT || '3000');
+
+app.listen(port);
 
 function normalizePort(val) {
     var port = parseInt(val, 10);
@@ -22,11 +28,8 @@ function normalizePort(val) {
     return false;
 }
 
-const port = normalizePort(process.env.PORT || '3000');
-
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+app.on('error', onError);
+app.on('listening', onListening);
 console.log('API rodando na porta ' + port);
 
 function onError(error) {
