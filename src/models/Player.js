@@ -9,6 +9,10 @@ class Player extends Model{
             sequelize: connection,
         })
     }
+
+    static associate(models) {
+        this.hasMany(models.Item, { foreignKey: 'owner_id', as: 'items' });
+    }
 }
 
 module.exports = Player;

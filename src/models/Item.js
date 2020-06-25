@@ -17,7 +17,7 @@ class Item extends Model{
 
     static associate(models) {
         this.belongsTo(models.Player, { foreignKey: 'owner_id', as: 'owner' });
-        this.belongsTo(models.Propertie , { foreignKey: 'prop', as: 'propertie' });
+        this.belongsToMany(models.Propertie, { foreignKey: 'prop_id', through: 'item_props', as: 'properties' });
     }
 }
 

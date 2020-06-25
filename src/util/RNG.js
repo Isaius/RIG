@@ -1,3 +1,3 @@
 const random = require('random');
 
-module.exports = ramdom;
+module.exports = random;

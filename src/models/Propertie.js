@@ -10,6 +10,9 @@ class Propertie extends Model{
             sequelize: connection,
         })
     }
+    static associate(models) {
+        this.belongsToMany(models.Item, { foreignKey: 'item_id', through: 'item_props', as: 'items' });
+    }
 }
 
 module.exports = Propertie;

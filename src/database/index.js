@@ -12,5 +12,6 @@ Item.init(connection);
 Player.init(connection);
 
 Item.associate(connection.models);
+Player.associate(connection.models);
 
 module.exports = connection;
