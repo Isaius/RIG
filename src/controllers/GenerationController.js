@@ -9,8 +9,8 @@ module.exports = {
             type, subtype, min_quality,
             max_quality, min_level, max_level, 
             min_atk, max_atk, min_def, max_def,
-        } = req.body;
-
+        } = req.body;   
+        
         const quality = Rand.integer(min_quality, max_quality);
         const level = Rand.integer(min_level, max_level);
         const atk = Rand.integer(min_atk, max_atk);
