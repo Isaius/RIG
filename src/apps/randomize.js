@@ -1,8 +1,10 @@
 'use strict'
 const random = require('random');
+const sentencer = require('sentencer');
+
 const types = ['Weapon', 'Armor', 'Accessory', 'Consumable']
 const subtypes = {
-    Weapon: ["Melee", "Ranged"],
+    Weapon: ["Sword", "Axe", "Dagger", "Bow", "Claw", "Long Sword", "Battle Axe", "Warhammer", "Spear"],
     Armor: ["Helmet", "Chest", "Pants", "Boots"],
     Accessory: ["Ring", "Bracers", "Necklace", "Cape", "Ornament"],
     Consumable: ["Heal", "Stats"]
@@ -15,6 +17,27 @@ const rarity = {
     Legendary: [2, 5], 
     Divine: [0, 1]
 };
+
+const quality = {
+    Common: 1, 
+    Uncommon: 2, 
+    Rare: 3, 
+    Unique: 4, 
+    Legendary: 5, 
+    Divine: 6
+};
+
+const attributes = [
+    'Strenght', 
+    'Dexterity', 
+    'Constituition', 
+    'Intelligence', 
+    'Wisdom', 
+    'Charism', 
+    'Luck',
+    'Resistance',
+    'Iron Skin'
+];
 
 module.exports = {
     async type(exclude = []){
@@ -45,8 +68,19 @@ module.exports = {
 
         for (const [key, value] of Object.entries(rarity)) {
             if(value[0]<= chance && chance<= value[1]){
-                return key;
+                return quality[key];
             }
         }
+    },
+
+    async name(item){
+        if(item.type == "Consumable"){
+            if(item.subtype == "Heal"){
+                return "Potion of Healing";
+            } else {
+                return `Potion of ${attributes[random.int(0, attributes.length-1)]}`;
+            }
+        }
+        return sentencer.make(item.subtype + " of {{ adjective }}");
     }
 };

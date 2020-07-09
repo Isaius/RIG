@@ -17,7 +17,8 @@
     "httpd": "0.0.2",
     "pg": "^8.0.2",
     "pg-hstore": "^2.3.3",
-    "random": "^2.1.1"
+    "random": "^2.1.1",
+    "sentencer": "^0.2.1"
   },
   "devDependencies": {
     "faker": "^4.1.0",
