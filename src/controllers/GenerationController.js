@@ -22,6 +22,7 @@ module.exports = {
             item.def = item.level + (random.int(1, 9) + item.quality)
         }
         
+        
         return res.json(item);
     }
 };
