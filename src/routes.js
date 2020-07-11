@@ -12,12 +12,14 @@ const routes = express.Router();
 routes.get('/properties', PropertieController.index);
 routes.post('/properties', PropertieController.store);
 
-routes.get('/player', PlayerController.index);
+routes.get('/player/:player_id', PlayerController.index);
 routes.post('/player', PlayerController.store);
+routes.post('/player/:player_id', PlayerController.addItem);
 
 routes.get('/player/:player_id/item', ItemController.index);
 routes.post('/player/:player_id/item', ItemController.store);
 
 routes.get('/generate', GenerationController.generate);
- 
+routes.post('/generate', GenerationController.generate);
+
 module.exports = routes;

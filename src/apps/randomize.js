@@ -1,6 +1,7 @@
 'use strict'
 const random = require('random');
 const sentencer = require('sentencer');
+const Propertie = require('../models/Propertie');
 
 const types = ['Weapon', 'Armor', 'Accessory', 'Consumable']
 const subtypes = {
@@ -50,8 +51,13 @@ module.exports = {
         return types[index];
     },
 
-    async subtype(type){
-        return subtypes[type][random.int(0, subtypes[type].length-1)];
+    async subtype(type, excluded_subtypes = []){ 
+        let sub;
+        do{
+            sub = subtypes[type][random.int(0, subtypes[type].length-1)];
+        } while (excluded_subtypes.includes(sub));
+
+        return sub;
     },
 
     async quality(exclude = []){
@@ -67,20 +73,30 @@ module.exports = {
         } while(chance < 0);
 
         for (const [key, value] of Object.entries(rarity)) {
-            if(value[0]<= chance && chance<= value[1]){
-                return quality[key];
+            if(!exclude.includes(key)){
+                if(value[0]<= chance && chance<= value[1]){
+                    return quality[key];
+                }
             }
         }
     },
 
-    async name(item){
-        if(item.type == "Consumable"){
-            if(item.subtype == "Heal"){
+    async name(type, subtype){
+        if(type == "Consumable"){
+            if(subtype == "Heal"){
                 return "Potion of Healing";
             } else {
                 return `Potion of ${attributes[random.int(0, attributes.length-1)]}`;
             }
         }
-        return sentencer.make(item.subtype + " of {{ adjective }}");
+        return sentencer.make(subtype + " of {{ adjective }}");
+    },
+
+    async props(item_quality){
+        const properties = await Propertie.findAll({ where: { rarity: item_quality } });
+        const random_number = await random.int(0, properties.length-1);
+        const random_prop = properties[random_number].dataValues.id;
+
+        return random_prop;
     }
 };

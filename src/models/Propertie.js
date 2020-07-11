@@ -11,7 +11,7 @@ class Propertie extends Model{
         })
     }
     static associate(models) {
-        this.belongsToMany(models.Item, { foreignKey: 'item_id', through: 'item_props', as: 'items' });
+        this.belongsToMany(models.Item, { foreignKey: 'prop_id', through: 'item_props' });
     }
 }
 

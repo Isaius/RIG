@@ -16,7 +16,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      prop_id:{
+      propertie_id:{
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: 'properties', key: 'id' },
