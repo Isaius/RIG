@@ -10,7 +10,7 @@ module.exports = {
             include: { association: 'items' }
         });
 
-        return res.json(player);
+        return res.json(player.items);
     },
 
     async store(req, res) {

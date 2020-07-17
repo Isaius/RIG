@@ -4,10 +4,19 @@ const Item = require('../models/Item');
 
 module.exports = {
     async index(req, res) {
+
+        const {player_id} = req.params;
+        
+        if(player_id){
+            console.log(`Receiving request for player ${player_id}`);
+            return await Player.findByPk(player_id);
+        }
+
         const players = await Player.findAll();
 
         return res.json(players);
     },
+    
 
     async store(req, res) {
         const { name, level } = req.body;
@@ -16,6 +25,7 @@ module.exports = {
 
         return res.json(player);
     },
+    
     async addItem(req, res) {
         const { player_id } = req.params;
         const { item_props } = req.body;
