@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from 'react';
 
-import { Container, Name, Info } from './styles';
+import { Container, Name, Info, InfoBox } from './styles';
 import IItem from '../../interfaces/IItem';
 
 interface Props {
-    item: IItem;
+    item: IItem,  
+    showName: boolean
 }
 
-const Item: React.FC<Props> = ({ item }) => {
+const rarity = [
+  'Common', 
+  'Uncommon', 
+  'Rare', 
+  'Unique', 
+  'Legendary', 
+  'Divine'
+];
+
+const Item: React.FC<Props> = ({ item, showName } ) => {
     const [state, setState] = useState<IItem>(item);
     useEffect(() => {
         setState(item);
@@ -15,11 +25,19 @@ const Item: React.FC<Props> = ({ item }) => {
 
   return(
     <Container>
-        <Name> {item.name} </Name>
-        <Info>
-          <p> {item.type} </p>
-          <p>{item.subtype}</p>
-        </Info>
+        { showName && <Name> {item.name} </Name> }
+        <InfoBox>
+          <Info>
+            <p> { item.type } </p>
+            <p> { item.subtype }</p>
+            <p> { rarity[item.quality] } </p>
+          </Info>
+          <Info>
+            <p> Level: { item.level } </p>
+            <p> Atk: { item.atk } </p>
+            <p> Def: { item.def } </p>
+          </Info>
+        </InfoBox>
     </Container>
   );
 }
