@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
 interface Props {
     item: IItem
 }
-const AccordionItem: React.FC<Props> = ( { item }) => {
+const AccordionItem: React.FC<Props> = ( { item  }) => {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState<string | false>(false);
 
@@ -48,7 +48,7 @@ const AccordionItem: React.FC<Props> = ( { item }) => {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        <Item item={item} showName={false} />
+                        <Item item={item} show={{ type:true, subtype:true, level:true, quality:true }} />
                     </Typography>
                 </AccordionDetails>
             </Accordion>
