@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Item from '../Item';
 import IItem from '../../interfaces/IItem';
 import { Container, ButtonBox } from './styles';
@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import api from '../../services/api';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,14 +36,20 @@ interface Props {
 const AccordionItem: React.FC<Props> = ( { item  }) => {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState<string | false>(false);
+    const [visibility, setVisibility] = useState(true);
 
     const handleChange = (panel: string) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
         setExpanded(isExpanded ? panel : false);
     };
 
+    const discart = async () =>{
+      await api.delete(`/player/inventory/${item.id}`);
+      setVisibility(false);
+    }
+
     return (
         <Container>
-            <Accordion expanded={expanded === `panel${item.id}`} onChange={handleChange(`panel${item.id}`)}>
+            {visibility && <Accordion expanded={expanded === `panel${item.id}`} onChange={handleChange(`panel${item.id}`)}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`panel${item.id}bh-content`} id={`panel${item.id}bh-header`} >
                     <Typography className={classes.heading}> { item.name } </Typography>
                     <Typography className={classes.secondaryHeading} > {`${item.type} - ${item.subtype}`} </Typography>
@@ -51,13 +58,13 @@ const AccordionItem: React.FC<Props> = ( { item  }) => {
                     <Typography>
                         <Item item={item} show={{ type:true, subtype:true, level:true, quality:true }} />
                         <ButtonBox>
-                          <IconButton aria-label="delete">
+                          <IconButton aria-label="delete" onClick={discart}>
                             <DeleteIcon color="secondary"/>
                           </IconButton>
                         </ButtonBox>
                     </Typography>
                 </AccordionDetails>
-            </Accordion>
+            </Accordion>}
         </Container>
     );
 }
