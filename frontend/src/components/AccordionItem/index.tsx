@@ -48,8 +48,9 @@ const AccordionItem: React.FC<Props> = ( { item  }) => {
     }
 
     return (
-        <Container>
-            {visibility && <Accordion expanded={expanded === `panel${item.id}`} onChange={handleChange(`panel${item.id}`)}>
+      <>
+      { visibility && <Container>
+            <Accordion expanded={expanded === `panel${item.id}`} onChange={handleChange(`panel${item.id}`)}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`panel${item.id}bh-content`} id={`panel${item.id}bh-header`} >
                     <Typography className={classes.heading}> { item.name } </Typography>
                     <Typography className={classes.secondaryHeading} > {`${item.type} - ${item.subtype}`} </Typography>
@@ -64,8 +65,9 @@ const AccordionItem: React.FC<Props> = ( { item  }) => {
                         </ButtonBox>
                     </Typography>
                 </AccordionDetails>
-            </Accordion>}
-        </Container>
+            </Accordion>
+        </Container>}
+      </>
     );
 }
 
