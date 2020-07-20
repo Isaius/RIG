@@ -9,4 +9,9 @@ export const Container = styled.div`
     margin-bottom: 10px;
     align-items: center;
     display: row;
+
+`;
+
+export const ButtonBox = styled.div`
+    padding-left: 400px;
 `;

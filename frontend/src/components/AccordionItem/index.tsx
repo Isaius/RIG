@@ -1,7 +1,7 @@
 import React from 'react';
 import Item from '../Item';
 import IItem from '../../interfaces/IItem';
-import { Container } from './styles';
+import { Container, ButtonBox } from './styles';
 
 import Accordion from '@material-ui/core/Accordion';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
@@ -9,7 +9,8 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,6 +50,11 @@ const AccordionItem: React.FC<Props> = ( { item  }) => {
                 <AccordionDetails>
                     <Typography>
                         <Item item={item} show={{ type:true, subtype:true, level:true, quality:true }} />
+                        <ButtonBox>
+                          <IconButton aria-label="delete">
+                            <DeleteIcon color="secondary"/>
+                          </IconButton>
+                        </ButtonBox>
                     </Typography>
                 </AccordionDetails>
             </Accordion>

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
 import ListItem from './components/ListItem';
 import api from './services/api';
 import IPlayer from './interfaces/IPlayer';

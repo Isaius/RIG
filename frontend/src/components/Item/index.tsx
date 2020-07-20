@@ -45,7 +45,9 @@ const Item: React.FC<Props> = ({ item, show } ) => {
     
   return(
     <Container>
-        { show.name && <Name> {item.name} </Name> }
+        <strong>
+          { show.name && <Name style={{ color: color}}> {item.name} </Name> }
+        </strong>
         <InfoBox>
           <Info>
             { show.type && <p> { item.type } </p>}
