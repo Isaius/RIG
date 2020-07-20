@@ -36,5 +36,11 @@ module.exports = {
         });
 
         return res.json(item);
+    },
+
+    async destroy(req, res) {
+        const { item_id } = req.params;
+        const item = await Item.findByPk(item_id);
+        return res.json(await item.destroy());
     }
 };

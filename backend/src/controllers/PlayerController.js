@@ -52,5 +52,10 @@ module.exports = {
         await item.addPropertie(prop);
 
         return res.json(item);
+    },
+
+    async removeItem(req, res) {
+        const { item_id } = req.params;
+        res.redirect(`../../item/${item_id}`);
     }
 };
