@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import { Container, Name, Info, InfoBox } from './styles';
 import IItem from '../../interfaces/IItem';
@@ -36,12 +36,8 @@ const rarityColor = [
 ]
 
 const Item: React.FC<Props> = ({ item, show } ) => {
-    const [state, setState] = useState<IItem>(item);
-    useEffect(() => {
-        setState(item);
-    }, []);
-    
-    const color = rarityColor[item.quality];
+
+  const color = rarityColor[item.quality];
     
   return(
     <Container>

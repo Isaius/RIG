@@ -1,28 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import ListItem from './components/ListItem';
-import api from './services/api';
-import IPlayer from './interfaces/IPlayer';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
-const player : IPlayer ={
-  player_id: 1,
-  name: "Samus",
-  level: 35
-}
+import rootReducer from './store/ducks/rootReducer';
+
+import Dashboard from './components/Dashboard';
 
 function App() {
-  const [state, setState] = useState<IPlayer>(player)
   
-  useEffect(() =>{
-    api.get(`/player/1`).then(response => {
-      setState(response.data);
-    });
-  }, []);
-
+  const store = createStore(rootReducer);
+  
   return (
-    <div className="App">
+    <Provider store={store}>
       <h1>Random Item Generator</h1>
-      <ListItem player={state}/>
-    </div>
+     <Dashboard />
+    </Provider>
   );
 }
 

@@ -1,7 +1,21 @@
 import axios from 'axios';
 
-const api = axios.create({
+import { Player } from '../store/ducks/players/types'
+
+const apiInstance = axios.create({
     baseURL: 'http://localhost:3333',
 });
 
-export default api;
+const getPlayer = async (player_id: number) =>{
+    const response = await apiInstance.get<Player>(`/player/${player_id}`);
+
+    return response.data;
+}
+const API = {
+    apiInstance,
+    getPlayer
+}
+
+export default apiInstance;
+
+// export default API;

@@ -1,0 +1,9 @@
+{
+    "name": "RIG",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+      "dev": "(cd backend && yarn dev) & (cd frontend && yarn start)"
+    }
+}
+  

@@ -1,34 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
 import { Container } from './styles';
-
-import api from '../../services/api';
-import IItem from '../../interfaces/IItem';
-import IPlayer from '../../interfaces/IPlayer';
-
 import AccordionItem from '../AccordionItem';
+import  { ApplicationState } from '../../store';
+import { loadRequest } from '../../store/ducks/items/actions';
 
-interface Props {
-    player: IPlayer;
-}
-
-const ListItem: React.FC<Props> = ({ player }) => {
-    const [items, setItems] = useState<IItem[]>([]);
-    const [player_state, setPlayer] = useState<IPlayer>(player);
-
-    
+const ListItem: React.FC = () => {
+    const dispach = useDispatch();
 
     useEffect(() => {
-        api.get<IItem[]>(`player/${player.player_id}/item`).then(response => {
-            setItems(response.data);
-            console.log(player.player_id);
-        });
-        setPlayer(player);
-    }, []);
-  return(
+        dispach({ type: loadRequest});
+    }, [dispach]);
+
+    const items = useSelector((state: ApplicationState) => state.items.data)
+    return(
         <Container>
             { items.map(item => <AccordionItem item={ item } />)}
         </Container>
-  );
+    );
 }
 
 export default ListItem;
