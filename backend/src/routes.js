@@ -20,6 +20,7 @@ routes.delete('/player/inventory/:item_id', PlayerController.removeItem);
 
 // Item routes
 routes.get('/items/player/:player_id', ItemController.index);
+routes.get('/items/:item_id', ItemController.show);
 routes.post('/items/add/:player_id', ItemController.store);
 routes.delete('/items/:item_id', ItemController.destroy);
 

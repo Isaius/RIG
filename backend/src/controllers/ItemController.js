@@ -13,6 +13,14 @@ module.exports = {
         return res.json(player.items);
     },
 
+    async show(req, res) {
+        const { item_id } = req.params;
+
+        const item = await Item.findByPk(item_id);
+
+        return res.json(item);
+    },
+
     async store(req, res) {
         const { player_id } = req.params;
         const { type, subtype, quality, name, level, atk, def } = req.body;
