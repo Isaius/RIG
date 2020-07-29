@@ -9,7 +9,9 @@ module.exports = {
         
         if(player_id){
             console.log(`Receiving request for player ${player_id}`);
-            return await Player.findByPk(player_id);
+            const player = await Player.findByPk(player_id);
+
+            return res.json(player);
         }
 
         const players = await Player.findAll();

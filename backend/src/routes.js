@@ -19,9 +19,9 @@ routes.post('/player/:player_id', PlayerController.addItem);
 routes.delete('/player/inventory/:item_id', PlayerController.removeItem);
 
 // Item routes
-routes.get('/player/:player_id/item', ItemController.index);
-routes.post('/player/:player_id/item', ItemController.store);
-routes.delete('/item/:item_id', ItemController.destroy);
+routes.get('/items/player/:player_id', ItemController.index);
+routes.post('/items/add/:player_id', ItemController.store);
+routes.delete('/items/:item_id', ItemController.destroy);
 
 // Generation routes
 routes.get('/generate', GenerationController.generate);
