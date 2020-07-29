@@ -2,11 +2,11 @@
 // ACTION TYPES
 
 export enum ItemsTypes {
-    LOAD_REQUEST = '@invetory/LOAD_REQUEST',
-    LOAD_SUCCESS = '@invetory/LOAD_SUCCESS',
-    LOAD_FAILURE = '@invetory/LOAD_FAILURE',
-    ADDD_ITEM = '@invetory/ADDD_ITEM',
-    REMOVE_ITEM = '@invetory/REMOVE_ITEM',
+    LOAD_REQUEST = '@items/LOAD_REQUEST',
+    LOAD_SUCCESS = '@items/LOAD_SUCCESS',
+    LOAD_FAILURE = '@items/LOAD_FAILURE',
+    ADDD_ITEM = '@items/ADDD_ITEM',
+    REMOVE_ITEM = '@items/REMOVE_ITEM',
 };
 
 // DATA TYPES

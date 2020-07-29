@@ -18,7 +18,7 @@ const reducer: Reducer<ItemsState> = (state = INITIAL_STATE, action) => {
         case ItemsTypes.LOAD_REQUEST:
             return { ...state, loading: true };
         case ItemsTypes.LOAD_SUCCESS:
-            return { ...state, loading: false, error: false, data: action.payload.data };
+            return { ...state, loading: false, error: false, data: action.payload };
         case ItemsTypes.LOAD_FAILURE:
             return { ...state, loading: false, error: true, data: [] };
         case ItemsTypes.ADDD_ITEM:

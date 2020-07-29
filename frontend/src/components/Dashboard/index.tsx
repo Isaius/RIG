@@ -1,19 +1,26 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { loadRequest } from '../../store/ducks/players/actions';
+import { loadSuccess, loadFailure } from '../../store/ducks/players/actions';
 import ListItem from '../ListItem';
-import { PlayersTypes } from '../../store/ducks/players/types';
+import { Player } from '../../store/ducks/players/types';
+import API from '../../services/api';
 
 
 const Dashboard: React.FC = () => {
     const dispatch = useDispatch();
-
-    useEffect(()=> {
-        console.log(`Dispatching for API`)
-        dispatch(loadRequest(1));
-        console.log(`Dispatched for API`)
-        
+    
+    useEffect(() => {
+        const fetch = async (player_id: number) => {
+            try {
+                const player = (await API.get<Player>(`/player/${player_id}`)).data;
+   
+                dispatch(loadSuccess(player));
+            } catch (error) {
+                dispatch(loadFailure);
+            }
+         };
+         fetch(1);
     }, [dispatch]);
 
   return(
