@@ -43,7 +43,7 @@ const AccordionItem: React.FC<Props> = ( { item  }) => {
     };
 
     const discart = async () =>{
-      await api.delete(`/player/inventory/${item.id}`);
+      await api.delete(`/items/${item.id}`);
       setVisibility(false);
     }
 
@@ -56,7 +56,7 @@ const AccordionItem: React.FC<Props> = ( { item  }) => {
                     <Typography className={classes.secondaryHeading} > {`${item.type} - ${item.subtype}`} </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Typography>
+                    <Typography component={'span'} >
                         <Item item={item} show={{ type:true, subtype:true, level:true, quality:true }} />
                         <ButtonBox>
                           <IconButton aria-label="delete" onClick={discart}>
